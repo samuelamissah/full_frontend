@@ -1,60 +1,95 @@
+/* Home.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .App {
   width: 100vw;
   height: auto;
   display: flex;
   align-items: center;
-  padding-top: 40px;
+  justify-content: center;
   flex-direction: column;
 }
 
-body {
-  margin: 0;
-  padding: 0;
+.posts-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow posts to wrap to the next line */
+  justify-content: center; /* Center posts horizontally */
+  gap: 20px; /* Add some space between posts */
 }
 
 .post {
-  width: 400px;
-  height: 300px;
-  border-radius: 10px;
-  display: flex;
+  width: 300px; /* Adjust width as needed */
+  height: auto;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   border: 1px solid lightgray;
-  font-family: Arial, Helvetica, sans-serif;
-
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
 }
 
 .post:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
 }
+
 .post .title {
-  flex: 20%;
+  padding: 10px;
   border-bottom: 1px solid lightgray;
   background-color: dodgerblue;
-  display: grid;
-  place-content: center;
   color: white;
+  text-align: center;
 }
 
 .post .body {
-  flex: 60%;
-  display: grid;
-  place-content: center;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  text-align: center; /* Center text horizontally */
 }
 
 .post .footer {
-  flex: 20%;
+  padding: 20px;
   border-top: 1px solid lightgray;
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
   background-color: dodgerblue;
   color: white;
+  text-align: center;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
+
+/* Media Queries for responsiveness */
+@media (min-width: 600px) {
+  .post {
+      width: 45%; /* Adjust width for larger screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .post {
+      width: 30%; /* Adjust width for larger screens */
+  }
+}
+
+@media (min-width: 992px) {
+  .post {
+      width: 23%; /* Adjust width for larger screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  .post {
+      width: 19%; /* Adjust width for larger screens */
+  }
+}
+
+
 
 /* CREATE POST PAGE CSS */
 
@@ -99,9 +134,160 @@ body {
 .formContainer button:hover {
   cursor: pointer;
   background-color: dodgerblue;
-  
 }
 
 span {
   color: red;
+}
+
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+/* INDIVIDUAL POST */
+.postPage {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.leftSide {
+  flex: 50%;
+  height: calc(100vh - 300px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#individual {
+  width: 600px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#individual .title,
+#individual .footer {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+#individual .body {
+  font-size: 25px;
+  margin: 10px 0;
+}
+
+.addCommentContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.addCommentContainer input,
+.addCommentContainer button {
+  width: 200px;
+  height: 50px;
+  margin: 5px 0;
+  border-radius: 8px;
+  border: none;
+  box-sizing: border-box;
+}
+
+.addCommentContainer button {
+  background-color: dodgerblue;
+  color: white;
+  cursor: pointer;
+}
+
+.addCommentContainer input {
+  border: 2px solid dodgerblue;
+}
+
+.listOfComments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment {
+  width: 70%;
+  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .postPage {
+    flex-direction: column;
+  }
+
+  .leftSide,
+  .rightSide {
+    flex: 100%;
+    height: auto;
+  }
+
+  #individual {
+    width: 90%;
+  }
+
+  #individual .title,
+  #individual .footer {
+    font-size: 25px;
+  }
+
+  #individual .body {
+    font-size: 20px;
+  }
+
+  .comment {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  #individual .title,
+  #individual .footer {
+    font-size: 20px;
+  }
+
+  #individual .body {
+    font-size: 18px;
+  }
+
+  .comment {
+    width: 95%;
+  }
+
+  .addCommentContainer input,
+  .addCommentContainer button {
+    width: 90%;
+  }
 }

@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
+import Post from './pages/Post';
 
 function App() {
 
@@ -10,11 +11,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Link to='/Createpost'>Create A Post </Link>
+        <div className='navbar'>
         <Link to='/'>Home</Link>
+        <Link to='/Createpost'>Create A Post </Link>
+        </div>
         <Routes>
           <Route path='/'  element={< Home />} />
           <Route path='/createpost' element={< CreatePost />} />
+          <Route path='/post/:id' element={< Post />} />
         </Routes>
       </Router>
       
