@@ -1,8 +1,9 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
+    let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -10,12 +11,18 @@ const Login = () => {
         event.preventDefault(); 
         const data = { userName: username, password: password };
         axios.post("http://127.0.0.1:3001/auth/login", data).then((response) => {
-            console.log(response.data);
-            
         
+            if (response.data.error) {
+                alert(response.data.error);
+            } else {
+                sessionStorage.setItem("accessToken", response.data);
+                 navigate('/home');
+                onLogin(); 
+            }
         });
-        
     };
+
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -24,7 +31,7 @@ const Login = () => {
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or{' '}
-                        <a href="/Registration" className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <a href="/registration" className="font-medium text-indigo-600 hover:text-indigo-500">
                             register a new account
                         </a>
                     </p>

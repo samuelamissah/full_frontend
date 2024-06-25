@@ -26,7 +26,9 @@ function CreatePost() {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required('You must input a title'),
     postText: Yup.string().required('You must input a post'),
-    userName: Yup.string().min(3).max(15).required('You must input a name')
+    userName: Yup.string().min(3).max(15).required('You must input a name'),
+    // commentBody should have a minimum length of 3 characters and maximum length of 1000 characters
+    commentBody: Yup.string().min(3).max(1000).required('You must input a comment'),
   });
 
   const onSubmit = (data) => {
