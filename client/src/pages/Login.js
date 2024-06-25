@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const Login = ({ onLogin }) => {
+
+
+
+const Login = ({onLogin}) => {
     let navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +21,7 @@ const Login = ({ onLogin }) => {
             } else {
                 sessionStorage.setItem("accessToken", response.data);
                  navigate('/home');
-                onLogin(); 
+                onLogin();
             }
         });
     };

@@ -7,6 +7,7 @@ function Post() {
   const [newComment, setNewComment] = useState("");
   const [postObject, setPostObject] = useState({});
   const [comments, setComments] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     axios.get(`http://127.0.0.1:3001/posts/byId/${id}`).then((response) => {
@@ -16,28 +17,37 @@ function Post() {
     axios.get(`http://127.0.0.1:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
+
+    const token = sessionStorage.getItem("accessToken");
+    if (token) {
+      setIsLoggedIn(true);
+    }
   }, [id]);
 
   const addComment = () => {
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      alert("You must be logged in to post a comment");
+      return;
+    }
+
     axios.post("http://localhost:3001/comments", {
       commentBody: newComment,
       PostId: id,
     },
     { 
         headers: 
-        { accessToken: sessionStorage.getItem("accessToken")
+        { accessToken: token
 
          } 
         }
     )
       .then((response) => {
-        if (response.data.error) {
-          console.log(response.data.error);
-        } else {
-          const commentToAdd = { commentBody: newComment };
-          setComments([...comments, commentToAdd]);
-          setNewComment("");
-        }
+        const commentToAdd = { commentBody: newComment, userName: response.data.userName};
+        setComments([...comments, commentToAdd]);
+        // add comment username
+
+        setNewComment("");
       });
   };
 
@@ -53,36 +63,50 @@ function Post() {
               <p className="text-gray-500">Posted by {postObject.userName}</p>
             </div>
             <div className="bg-white p-4 rounded shadow-md mt-4 max-h-80 overflow-y-auto">
-              <h3 className="text-xl font-bold mb-4">Comments</h3>
-              <table className="w-full">
-                <tbody>
-                  {comments.map((comment, key) => (
-                    <tr key={key}>
-                      <td className="border px-4 py-2">{comment.commentBody}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+  <h3 className="text-xl font-bold mb-4">Comments</h3>
+  <table className="w-full">
+    <tbody>
+      {comments.map((comment, key) => (
+        <tr key={key}>
+          <td className="border px-4 py-2">
+            <div className="flex justify-between items-center">
+              <span>{comment.commentBody}</span>
+              <span className="text-gray-500 text-sm italic">
+                Comment was by: <span className="text-red-700">{comment.userName}</span>
+              </span>
             </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
           </div>
           <div className="md:w-1/3 mt-4 md:mt-0">
             <div className="bg-white p-4 rounded shadow-md">
               <h3 className="text-xl font-bold mb-4">Add a Comment</h3>
-              <input
-                type="text"
-                placeholder="Comment..."
-                autoComplete="off"
-                value={newComment}
-                onChange={(event) => setNewComment(event.target.value)}
-                className="w-full p-2 mb-2 border rounded"
-              />
-              <button
-                type="submit"
-                onClick={addComment}
-                className="w-full bg-blue-500 text-white py-2 rounded"
-              >
-                Add Comment
-              </button>
+              {isLoggedIn ? (
+                <>
+                  <input
+                    type="text"
+                    placeholder="Comment..."
+                    autoComplete="off"
+                    value={newComment}
+                    onChange={(event) => setNewComment(event.target.value)}
+                    className="w-full p-2 mb-2 border rounded"
+                  />
+                  <button
+                    type="submit"
+                    onClick={addComment}
+                    className="w-full bg-blue-500 text-white py-2 rounded"
+                  >
+                    Add Comment
+                  </button>
+                </>
+              ) : (
+                <p className="text-red-500">You must be logged in to add a comment</p>
+              )}
             </div>
           </div>
         </div>
