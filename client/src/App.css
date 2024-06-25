@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 /* Home.css */
 
 body {
@@ -6,14 +12,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.App {
-  width: 100vw;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
+
 
 .posts-container {
   display: flex;
@@ -91,54 +90,8 @@ body {
 
 
 
-/* CREATE POST PAGE CSS */
 
-.createPostPage {
-  font-family: Arial, Helvetica, sans-serif;
-  width: 100vw;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 500px;
-  height: auto;
-  padding: 20px;
-  border: 5px solid dodgerblue;
-  border-radius: 5px;
-}
 
-.formContainer #inputCreatePost {
-  height: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding-left: 10px;
-  font-size: 20px;
-}
-
-.formContainer button {
-  margin-top: 15px;
-  height: 40px;
-  border: none;
-  background-color: lightskyblue;
-  border-radius: 5px;
-  color: white;
-}
-
-.formContainer button:hover {
-  cursor: pointer;
-  background-color: dodgerblue;
-}
-
-span {
-  color: red;
-}
 
 /* NAVBAR */
 
@@ -289,5 +242,73 @@ span {
   .addCommentContainer input,
   .addCommentContainer button {
     width: 90%;
+  }
+}
+
+/* Registration.css */
+
+.RegistrationContainer {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: aliceblue;
+
+  
+}
+
+.RegistrationContainer label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.RegistrationContainer input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.RegistrationContainer button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.RegistrationContainer button:hover {
+  background-color: #0056b3;
+}
+
+.RegistrationContainer span {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .RegistrationContainer {
+    padding: 10px;
+  }
+  .formContainer {
+    width: 20px;
+  }
+
+  .RegistrationContainer label,
+  .RegistrationContainer input,
+  .RegistrationContainer button {
+    font-size: 14px;
   }
 }
