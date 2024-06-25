@@ -24,7 +24,13 @@ const RegistrationPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-4 bg-white rounded shadow-md">
-        <h1 className="text-3xl font-bold text-center mb-4">Registration Page</h1>
+        <h1 className="text-3xl font-bold text-center">Registration</h1>
+        <p className="mt-2 text-center text-sm text-gray-600">
+                        Or{' '}
+                        <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                            Sign in to your account
+                        </a>
+                    </p>
         <div>
           <Formik
             initialValues={initialValues}
@@ -33,7 +39,7 @@ const RegistrationPage = () => {
           >
             <Form className="space-y-4">
               <div>
-                <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="userName" className="block text-sm font-bold text-gray-700">
                   UserName:
                 </label>
                 <Field
@@ -48,7 +54,7 @@ const RegistrationPage = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-bold text-gray-700">
                   Password:
                 </label>
                 <Field
