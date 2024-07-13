@@ -43,7 +43,7 @@ function Post() {
         }
     )
       .then((response) => {
-        const commentToAdd = { commentBody: newComment, userName: response.data.userName};
+        const commentToAdd = { commentBody: newComment, userName: response.data.userName, createdAt: new Date()};
         setComments([...comments, commentToAdd]);
         // add comment username
 
@@ -61,6 +61,7 @@ function Post() {
               <h2 className="text-2xl font-bold mb-4">{postObject.title}</h2>
               <p className="mb-2">{postObject.postText}</p>
               <p className="text-gray-500">Posted by {postObject.userName}</p>
+              <p className="text-gray-500">Created at {new Date(postObject.createdAt).toLocaleString()}</p>
             </div>
             <div className="bg-white p-4 rounded shadow-md mt-4 max-h-80 overflow-y-auto">
   <h3 className="text-xl font-bold mb-4">Comments</h3>
@@ -69,10 +70,13 @@ function Post() {
       {comments.map((comment, key) => (
         <tr key={key}>
           <td className="border px-4 py-2">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-3">
               <span>{comment.commentBody}</span>
               <span className="text-gray-500 text-sm italic">
-                Comment was by: <span className="text-red-700">{comment.userName}</span>
+                Created by: <span className="text-red-700 mx-2">{comment.userName}</span>
+              </span>
+              <span className="text-gray-500 text-sm italic">
+                Created at: <span className='text-red-800 text-md'> {new Date(comment.createdAt).toLocaleString()}</span>
               </span>
             </div>
           </td>

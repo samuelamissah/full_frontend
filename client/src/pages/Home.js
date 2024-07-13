@@ -18,11 +18,17 @@ function Home() {
   
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 overflow-x-hidden">
-    <h1 className="text-center text-3xl font-extrabold text-gray-900 mb-8">
-      Random Texts Messages / Post
-    </h1>
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div 
+    style={{
+      backgroundImage: `url('/bb.jpg')`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+
+    }}
+    
+    className="min-h-screen bg-gray-50 py-8 px-4 overflow-x-hidden">
+    <h1 className="text-3xl font-bold text-center">Home</h1>
+    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
       {listOfPosts.map((value) => (
         <div
           key={value.id}

@@ -55,14 +55,18 @@ function CreatePost() {
   return (
     <div
       style={{
-        backgroundImage: `url('/kk.jpg')`
-      }}
-      className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center "
-    >
-      <div className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl bg-white p-6 rounded-lg shadow bg-transparent border-8 border-sky-300">
+        backgroundImage: `url('/kkk.png')`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+   
+  }}
+  className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center "
+>
+      <div className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl p-6 rounded-lg mt-12 shadow bg-transparent border-8 border-sky-300">
         {isAuthenticated ? (
           <>
-            <h1 className="text-center text-3xl font-extrabold text-gray-900 mb-8 text-red-500">Create Your Post</h1>
+            <h1 className="text-center text-3xl font-extrabold text-gray-900 mb-8 text-black-800">Create Your Post</h1>
             <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={validationSchema}>
               <Form className="space-y-8">
                 <div>
