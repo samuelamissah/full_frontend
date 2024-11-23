@@ -55,13 +55,12 @@ function CreatePost() {
   return (
     <div
       style={{
-        backgroundImage: `url('/kkk.png')`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-   
+        backgroundImage: `url('/tre.jpg')`,
+        // backgroundSize: 'no-cover',
+        // backgroundRepeat: 'no-repeat no-repeat',
+        // backgroundPosition: 'center'
   }}
-  className="min-h-screen flex items-center justify-center p-4 bg-cover bg-center "
+  className="min-h-screen flex items-center justify-center p-4  bg-cover bg-no-repeat bg-center h-full w-full "
 >
       <div className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl p-6 rounded-lg mt-12 shadow bg-transparent border-8 border-sky-300">
         {isAuthenticated ? (
