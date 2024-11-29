@@ -1,6 +1,6 @@
 
 //initialize server and make api calls to the server
-
+const PORT = process.env.PORT || 3001;
 const express = require('express');
 
 const app = express();
@@ -27,9 +27,8 @@ const usersRouter = require('./routes/Users');
 app.use('/auth', usersRouter);
 
 db.sequelize.sync().then(() => {
-  app.listen(3001, () => {
-    console.log('Server is running on port 3001');
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
   });
 });
-
 

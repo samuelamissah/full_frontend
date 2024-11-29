@@ -5,45 +5,46 @@ const bcrypt = require('bcryptjs');
 const { sign } = require("jsonwebtoken");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-
 router.post("/", async (req, res) => {
     const { userName, password } = req.body;
     if (!password) {
-      return res.json("Password is required");
+        return res.status(400).json({ error: "Password is required" });
     }
-    bcrypt.hash(password, 10).then((hash) => {
-        Users.create({
+    try {
+        const hash = await bcrypt.hash(password, 10);
+        await Users.create({
             userName: userName,
             password: hash
         });
-        res.json("Success");
-    }).catch((error) => {
-        console.log(error);
-        res.json("Error");
-    });
-  });
+        res.status(201).json({ message: "User created successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
-//login route
-
+// login route
 router.post("/login", async (req, res) => {
     const { userName, password } = req.body;
-    const user = await Users.findOne({ where: { userName: userName } });
-    if (!user) {
-        return res.json({ error: "User Doesn't Exist" }); // Use return to exit the function
-    }
-    bcrypt.compare(password, user.password).then((match) => {
+    try {
+        const user = await Users.findOne({ where: { userName: userName } });
+        if (!user) {
+            return res.status(404).json({ error: "User doesn't exist" });
+        }
+        const match = await bcrypt.compare(password, user.password);
         if (!match) {
-            return res.json({ error: "Wrong Username and Password Combination" }); // Use return to exit the function
+            return res.status(401).json({ error: "Wrong username and password combination" });
         }
         const accessToken = sign({ userName: user.userName, id: user.id }, "importantsecret");
-        res.json(accessToken);
-    });
+        res.status(200).json({ accessToken });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 router.get("/auth", validateToken, (req, res) => {
-    res.json(req.user);
-}
-);
-
+    res.status(200).json(req.user);
+});
 
 module.exports = router;

@@ -52,9 +52,16 @@ function Post() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div 
+        style={{
+            backgroundImage:  `url('/kss.jpg')`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+        }}
+        className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-screen-lg p-4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Post Details</h1>
+        <h1 className="text-3xl font-bold  text-center text-blue-500">Post Details</h1>
         <div className="flex flex-col md:flex-row md:space-x-4 justify-center">
           <div className="md:w-2/3">
             <div className="bg-white p-4 rounded shadow-md">
